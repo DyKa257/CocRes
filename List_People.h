@@ -16,7 +16,7 @@ struct List_People
     List_People *next;
     void (*add)(List_People *obj, char *ID, char *user, char *pass);
     void (*delete)(List_People *father, List_People *obj);
-    bool (*check)(List_People *obj, char *user, char *pass);
+    int (*check)(List_People *obj, char *user, char *pass);
     void (*inp)(List_People *obj);
     void (*out)(List_People *obj);
     void (*destroy)(List_People *obj);
@@ -25,7 +25,7 @@ List_People *List_People_Init();
 List_People *People_Init(char *ID, char *user, char *pass);
 void Add_People(List_People *obj, char *ID, char *user, char *pass);
 void Delete_People(List_People *father, List_People *obj);
-bool Check_People(List_People *obj, char *user, char *pass);
+int Check_People(List_People *obj, char *user, char *pass);
 void Inp_People(List_People *obj);
 void Out_People(List_People *obj);
 void Destroy_People(List_People *obj);
@@ -88,14 +88,15 @@ void Delete_People(List_People *father, List_People *obj)
     father->next = obj->next;
     free(obj);
 }
-bool Check_People(List_People *obj, char *user, char *pass)
+int Check_People(List_People *obj, char *user, char *pass)
 {
     List_People *list_people = obj->next;
     for(; list_people->next != NULL; list_people = list_people->next)
     {
-        if (str_check(list_people->user, user) && str_check(list_people->pass, pass)) return true;
+        if (str_check(list_people->user, user) && str_check(list_people->pass, pass)) \
+            return (list_people->ID[0] - '0');
     }
-    return false;
+    return 0;
 }
 void Inp_People(List_People *obj)
 {

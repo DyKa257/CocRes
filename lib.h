@@ -9,6 +9,7 @@
 
 int str_to_int(char *s);
 void _str(char *str1, char *str2);
+bool str_check(char *str1, char *str2);
 
 //========= function definition =========//
 
@@ -26,6 +27,12 @@ void _str(char *str1, char *str2)
 {
     for (int i = 0; i <= strlen(str2); i++)
         *(str1+i) = *(str2+i);
+}
+bool str_check(char *str1, char *str2)
+{
+    for (int i = 0; i <= strlen(str2); i++)
+        if (*(str1+i) != *(str2+i)) return 0;
+    return 1;
 }
 
 #endif
