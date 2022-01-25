@@ -52,8 +52,8 @@ List_Goods *Goods_Init(char *name, int num, char *unit)
 {
     List_Goods* obj = (List_Goods*) malloc(sizeof(List_Goods));
     obj->next = NULL;
-    obj->name = malloc(sizeof(char));
-    obj->unit = malloc(sizeof(char));
+    obj->name = malloc(strlen(name) * sizeof(char));
+    obj->unit = malloc(strlen(unit) * sizeof(char));
     _str(obj->name, name);
     obj->num = num;
     _str(obj->unit, unit);

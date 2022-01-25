@@ -10,11 +10,12 @@
 typedef struct List_People List_People;
 struct List_People
 {
-    char *ID;
+    int ID;
     char *user;
     char *pass;
     List_People *next;
-    void (*add)(List_People *obj, char *ID, char *user, char *pass);
+    int (*new_ID)(List_People *obj, int type);
+    void (*add)(List_People *obj, int ID, char *user, char *pass);
     void (*delete)(List_People *father, List_People *obj);
     int (*check)(List_People *obj, char *user, char *pass);
     void (*inp)(List_People *obj);
@@ -22,8 +23,9 @@ struct List_People
     void (*destroy)(List_People *obj);
 };
 List_People *List_People_Init();
-List_People *People_Init(char *ID, char *user, char *pass);
-void Add_People(List_People *obj, char *ID, char *user, char *pass);
+List_People *People_Init(int ID, char *user, char *pass);
+int New_ID_People(List_People *obj, int type);
+void Add_People(List_People *obj, int ID, char *user, char *pass);
 void Delete_People(List_People *father, List_People *obj);
 int Check_People(List_People *obj, char *user, char *pass);
 void Inp_People(List_People *obj);
@@ -41,10 +43,9 @@ List_People *List_People_Init()
 {
     List_People* obj = (List_People*) malloc(sizeof(List_People));
     obj->next = NULL;
-    obj->ID = malloc(sizeof(char));
     obj->user = malloc(sizeof(char));
     obj->pass = malloc(sizeof(char));
-    obj->ID = "";
+    obj->ID = 0;
     obj->user = "";
     obj->pass = "";
     obj->add = &Add_People;
@@ -55,25 +56,28 @@ List_People *List_People_Init()
     obj->destroy = &Destroy_People;
     return (List_People*) obj;
 }
-List_People *People_Init(char *ID, char *user, char *pass)
+List_People *People_Init(int ID, char *user, char *pass)
 {
     List_People* obj = (List_People*) malloc(sizeof(List_People));
     obj->next = NULL;
-    obj->ID = malloc(strlen(ID) * sizeof(char));
     obj->user = malloc(strlen(user) * sizeof(char));
     obj->pass = malloc(strlen(pass) * sizeof(char));
-    _str(obj->ID, ID);
+    obj->ID = ID;
     _str(obj->user, user);
     _str(obj->pass, pass);
     obj->add = &Add_People;
     obj->delete = &Delete_People;
     obj->check = &Check_People;
     obj->inp = &Inp_People;
-    obj->out = &Out_People;
+    obj->out = &Out_People; 
     obj->destroy = &Destroy_People;
     return (List_People*) obj;
 }
-void Add_People(List_People *obj, char *ID, char *user, char *pass)
+int New_ID_People(List_People *obj, int type)
+{
+    int ID_user, ID_admin;
+}
+void Add_People(List_People *obj, int ID, char *user, char *pass)
 {
     List_People *list_people = People_Init(ID, user, pass);
     List_People *tmp = obj;
@@ -94,7 +98,7 @@ int Check_People(List_People *obj, char *user, char *pass)
     for(; list_people->next != NULL; list_people = list_people->next)
     {
         if (str_check(list_people->user, user) && str_check(list_people->pass, pass)) \
-            return (list_people->ID[0] - '0');
+            return (list_people->ID / 10000);
     }
     return 0;
 }
@@ -108,7 +112,7 @@ void Inp_People(List_People *obj)
         fscanf(inp, "%s", &tmp);
         for (int i = 0; i <= strlen(tmp); i++)
             tmp1[i] = tmp[i];
-        char *ID = strtok(tmp1, ",");
+        int ID = str_to_int(strtok(tmp1, ","));
         char *user = strtok(NULL, ",");
         char *pass = strtok(NULL, ",");
         obj->add(obj, ID, user, pass);
@@ -121,12 +125,12 @@ void Out_People(List_People *obj)
     List_People *list_people = obj->next;
     for(; list_people->next != NULL; list_people = list_people->next)
     {
-        fprintf(out, "%s,", list_people->ID);
-        fprintf(out, "%d,", list_people->user);
+        fprintf(out, "%d,", list_people->ID);
+        fprintf(out, "%s,", list_people->user);
         fprintf(out, "%s,\n", list_people->pass);
     }
-    fprintf(out, "%s,", list_people->ID);
-    fprintf(out, "%d,", list_people->user);
+    fprintf(out, "%d,", list_people->ID);
+    fprintf(out, "%s,", list_people->user);
     fprintf(out, "%s,", list_people->pass);
     fclose(out);
 }
@@ -135,7 +139,6 @@ void Destroy_People(List_People *obj)
     List_People *tmp = obj->next;
     while(1)
     {        
-        free(obj->ID);
         free(obj->pass);
         free(obj);
         obj = tmp;
