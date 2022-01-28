@@ -4,7 +4,7 @@
 #include "lib.h"
 #define fin_1 "list_goods.txt"
 
-//========= class List_Goods =========// 
+//========= class List_Goods =========//
 
 typedef struct List_Goods List_Goods;
 struct List_Goods

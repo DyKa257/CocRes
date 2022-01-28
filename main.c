@@ -8,7 +8,11 @@
 #include <gtk/gtkx.h>
 #include <math.h>
 #include <ctype.h>
-#include "List_People.h"
+#include "List_Goods.h"
+#include "Order.h"
+#include "Booking.h"
+
+Book table[13];
 
 GtkBuilder *builder;
 GtkWidget *window1;
@@ -18,6 +22,7 @@ GtkWidget *window2;
 GtkWidget *entry2_1;
 GtkWidget *button2_1;
 GtkWidget *button2_2;
+GtkWidget *label2_4;
 GtkWidget *window3;
 GtkWidget *button3_1;
 GtkWidget *button3_2;
@@ -57,11 +62,54 @@ GtkWidget *button4_26;
 GtkWidget *button4_27;
 GtkWidget *window5;
 GtkWidget *button5_1;
+GtkWidget *entry5_1;
+GtkWidget *entry5_2;
+GtkWidget *entry5_3;
+GtkWidget *label5_5;
+GtkWidget *window6;
+GtkWidget *button6_1;
+GtkWidget *button6_2;
+GtkWidget *spin6_1;
+GtkWidget *spin6_2;
+GtkWidget *spin6_3;
+GtkWidget *spin6_4;
+GtkWidget *spin6_5;
+GtkWidget *spin6_6;
+GtkWidget *spin6_7;
+GtkWidget *spin6_8;
+GtkWidget *spin6_9;
+GtkWidget *spin6_10;
+GtkWidget *window7;
+GtkWidget *button7_1;
+GtkWidget *entry7_1;
+GtkWidget *entry7_2;
+GtkWidget *label7_4;
+GtkWidget *window8;
+GtkWidget *button8_1;
+GtkWidget *label8_4;
+GtkWidget *label8_5;
+GtkWidget *label8_6;
+GtkWidget *label8_8;
+GtkWidget *label8_12;
+GtkWidget *label8_13;
+GtkWidget *label8_14;
+GtkWidget *viewport8_1;
+GtkWidget *scrollbar8_1;
+GtkWidget *grid8_1;
+GtkWidget *label8[4][9];
+GtkWidget *window9;
+GtkWidget *button9_1;
+GtkWidget *entry9_1;
+GtkWidget *entry9_2;
+GtkWidget *label9_3;
 
-List_People *list_people;
+int row;
+char *rowtext[4][100];
 
 int main (int argc,char *argv[])
 {
+    reset_table();
+    reset_bill();
     gtk_init (&argc, &argv);
 
     //load_css();
@@ -75,11 +123,18 @@ int main (int argc,char *argv[])
     window3 = GTK_WIDGET(gtk_builder_get_object (builder, "window3"));
     window4 = GTK_WIDGET(gtk_builder_get_object (builder, "window4"));
     window5 = GTK_WIDGET(gtk_builder_get_object (builder, "window5"));
+    window6 = GTK_WIDGET(gtk_builder_get_object (builder, "window6"));
+    window7 = GTK_WIDGET(gtk_builder_get_object (builder, "window7"));
+    window8 = GTK_WIDGET(gtk_builder_get_object (builder, "window8"));
+    window9 = GTK_WIDGET(gtk_builder_get_object (builder, "window9"));
+    gtk_widget_set_name(window4, "window4");
 
     g_signal_connect(window1, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     g_signal_connect(window2, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     g_signal_connect(window3, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     g_signal_connect(window4, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect(window6, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect(window8, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 
     gtk_builder_connect_signals(builder, NULL);
 
@@ -89,8 +144,10 @@ int main (int argc,char *argv[])
     entry2_1 = GTK_WIDGET(gtk_builder_get_object (builder, "entry2_1"));
     button2_1 = GTK_WIDGET(gtk_builder_get_object (builder, "button2_1"));
     button2_2 = GTK_WIDGET(gtk_builder_get_object (builder, "button2_2"));
+    label2_4 = GTK_WIDGET(gtk_builder_get_object (builder, "label2_4"));
     gtk_widget_set_name(button2_1, "button2_1");
     gtk_widget_set_name(button2_2, "button2_2");
+    gtk_widget_set_name(entry2_1, "entry2_1");
 
     button3_1 = GTK_WIDGET(gtk_builder_get_object (builder, "button3_1"));
     button3_2 = GTK_WIDGET(gtk_builder_get_object (builder, "button3_2"));
@@ -152,8 +209,53 @@ int main (int argc,char *argv[])
     gtk_widget_set_name(button4_27, "button4_27");
 
     button5_1 = GTK_WIDGET(gtk_builder_get_object (builder, "button5_1"));
+    entry5_1 = GTK_WIDGET(gtk_builder_get_object (builder, "entry5_1"));
+    entry5_2 = GTK_WIDGET(gtk_builder_get_object (builder, "entry5_2"));
+    entry5_3 = GTK_WIDGET(gtk_builder_get_object (builder, "entry5_3"));
+    label5_5 = GTK_WIDGET(gtk_builder_get_object (builder, "label5_5"));
+    
+    button6_1 = GTK_WIDGET(gtk_builder_get_object (builder, "button6_1"));
+    button6_2 = GTK_WIDGET(gtk_builder_get_object (builder, "button6_2"));
+    spin6_1 = GTK_WIDGET(gtk_builder_get_object (builder, "spin6_1"));
+    spin6_2 = GTK_WIDGET(gtk_builder_get_object (builder, "spin6_2"));
+    spin6_3 = GTK_WIDGET(gtk_builder_get_object (builder, "spin6_3"));
+    spin6_4 = GTK_WIDGET(gtk_builder_get_object (builder, "spin6_4"));
+    spin6_5 = GTK_WIDGET(gtk_builder_get_object (builder, "spin6_5"));
+    spin6_6 = GTK_WIDGET(gtk_builder_get_object (builder, "spin6_6"));
+    spin6_7 = GTK_WIDGET(gtk_builder_get_object (builder, "spin6_7"));
+    spin6_8 = GTK_WIDGET(gtk_builder_get_object (builder, "spin6_8"));
+    spin6_9 = GTK_WIDGET(gtk_builder_get_object (builder, "spin6_9"));
+    spin6_10 = GTK_WIDGET(gtk_builder_get_object (builder, "spin6_10"));
 
-    gtk_widget_set_name(button1_1, "button1_1");
+    button7_1 = GTK_WIDGET(gtk_builder_get_object (builder, "button7_1"));
+    entry7_1 = GTK_WIDGET(gtk_builder_get_object (builder, "entry7_1"));
+    entry7_2 = GTK_WIDGET(gtk_builder_get_object (builder, "entry7_2"));
+    label7_4 = GTK_WIDGET(gtk_builder_get_object (builder, "label7_4"));
+  
+    button8_1 = GTK_WIDGET(gtk_builder_get_object (builder, "button8_1"));
+    label8_4 = GTK_WIDGET(gtk_builder_get_object (builder, "label8_4"));
+    label8_5 = GTK_WIDGET(gtk_builder_get_object (builder, "label8_5"));
+    label8_6 = GTK_WIDGET(gtk_builder_get_object (builder, "label8_6"));
+    label8_8 = GTK_WIDGET(gtk_builder_get_object (builder, "label8_8"));
+    label8_12 = GTK_WIDGET(gtk_builder_get_object (builder, "label8_12"));
+    label8_13 = GTK_WIDGET(gtk_builder_get_object (builder, "label8_13"));
+    label8_14 = GTK_WIDGET(gtk_builder_get_object (builder, "label8_14"));
+    viewport8_1 = GTK_WIDGET(gtk_builder_get_object (builder, "viewport8_1")) ;
+    scrollbar8_1 = GTK_WIDGET(gtk_builder_get_object (builder, "scrollbar8_1"));
+    grid8_1 = GTK_WIDGET(gtk_builder_get_object (builder, "grid8_1"));
+
+    button9_1 = GTK_WIDGET(gtk_builder_get_object (builder, "button9_1"));
+    entry9_1 = GTK_WIDGET(gtk_builder_get_object (builder, "entry9_1"));
+    entry9_2 = GTK_WIDGET(gtk_builder_get_object (builder, "entry9_2"));
+    label9_3 = GTK_WIDGET(gtk_builder_get_object (builder, "label9_3"));
+
+    for (int i = 0; i < 8; i++)
+    {
+        label8[0][i] = gtk_label_new("");
+        label8[1][i] = gtk_label_new("");
+        label8[2][i] = gtk_label_new("");
+        label8[3][i] = gtk_label_new("");
+    }
 
     GtkCssProvider *cssProvider = gtk_css_provider_new();
     GError *error = NULL;
@@ -175,7 +277,7 @@ int main (int argc,char *argv[])
 void on_button1_1_clicked(GtkButton *b)
 {
     gtk_widget_hide(window1);
-    gtk_widget_show(window4);
+    gtk_widget_show(window6);
 }
 void on_button1_2_clicked(GtkButton *b)
 {
@@ -190,12 +292,26 @@ void on_button2_1_clicked(GtkButton *b)
     {
         gtk_widget_hide(window2);
         gtk_widget_show(window3);
+    } else
+    {
+        gtk_label_set_text((GtkLabel*) label2_4, "Wrong password!");
+        gtk_entry_set_text((GtkEntry*) entry5_1, "");
     }
+}
+void on_button2_2_clicked(GtkButton *b)
+{
+    gtk_widget_hide(window2);
+    gtk_widget_show(window1);
 }
 void on_button3_1_clicked(GtkButton *b)
 {
     gtk_widget_hide(window3);
     gtk_widget_show(window4);
+}
+void on_button3_2_clicked(GtkButton *b)
+{
+    gtk_widget_hide(window3);
+    gtk_widget_show(window9);
 }
 void on_button3_5_clicked(GtkButton *b)
 {
@@ -205,7 +321,7 @@ void on_button3_5_clicked(GtkButton *b)
 void on_button4_1_clicked(GtkButton *b)
 {
     gtk_widget_hide(window4);
-    gtk_widget_show(window1);
+    gtk_widget_show(window3);
 }
 void on_button4_2_clicked(GtkButton *b)
 {
@@ -284,7 +400,294 @@ void on_button4_26_clicked(GtkButton *b)
 }
 void on_button5_1_clicked(GtkButton *b)
 {
-    gtk_widget_hide(window5);
-    gtk_widget_hide(window4);
+    char tmp1[100], tmp2[100], tmp3[100];
+    sprintf(tmp1, "%s", gtk_entry_get_text((GtkEntry*) entry5_1));
+    sprintf(tmp2, "%s", gtk_entry_get_text((GtkEntry*) entry5_2));
+    sprintf(tmp3, "%s", gtk_entry_get_text((GtkEntry*) entry5_3));
+    if (!str_check1(tmp1))
+    {
+        gtk_label_set_text((GtkLabel*) label5_5, "Invalid Name!");
+    } else
+    if (!str_check2(tmp2))
+    {
+        gtk_label_set_text((GtkLabel*) label5_5, "Invalid Phone Number!");
+    } else
+    if (!str_check2(tmp3))
+    {
+        gtk_label_set_text((GtkLabel*) label5_5, "Invalid Table!");
+    } else
+    {
+        booking(tmp1, tmp2, tmp3);
+        gtk_widget_hide(window5);
+        gtk_widget_hide(window4);
+        gtk_widget_show(window6);
+        gtk_entry_set_text((GtkEntry*) entry5_1, "");
+        gtk_entry_set_text((GtkEntry*) entry5_2, "");
+        gtk_entry_set_text((GtkEntry*) entry5_3, "");
+    }
+}
+void on_button6_1_clicked(GtkButton *b)
+{
+    gtk_widget_hide(window6);
+    gtk_widget_show(window1);
+}
+void on_button6_2_clicked(GtkButton *b)
+{
+    gtk_widget_show(window7);
+}
+void on_button7_1_clicked(GtkButton *b)
+{
+    char tmp1[100], tmp2[100];
+    sprintf(tmp1, "%s", gtk_entry_get_text((GtkEntry*) entry7_1));
+    sprintf(tmp2, "%s", gtk_entry_get_text((GtkEntry*) entry7_2));
+    if(!check_table(tmp1, tmp2))
+    {
+        gtk_label_set_text((GtkLabel*) label7_4, "Invalid Table or Phone number!");
+    } else
+    {
+        items tmp[500];
+        FILE *Menu = fopen("Menu.txt", "r");
+        for (int i = 0; i < 10; i++)
+            fscanf(Menu, "%s%f", &tmp[i].item, &tmp[i].price);
+        tmp[0].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_1));
+        tmp[1].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_2));
+        tmp[2].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_3));
+        tmp[3].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_4));
+        tmp[4].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_5));
+        tmp[5].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_6));
+        tmp[6].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_7));
+        tmp[7].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_8));
+        tmp[8].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_9));
+        tmp[9].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_10));
+
+        order(tmp2, 10, tmp);
+
+        gtk_widget_hide(window7);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_1), 0);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_2), 0);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_3), 0);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_4), 0);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_5), 0);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_6), 0);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_7), 0);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_8), 0);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_9), 0);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_10), 0);
+    }
+    gtk_entry_set_text((GtkEntry*) entry7_1, "");
+    gtk_entry_set_text((GtkEntry*) entry7_2, "");
+}
+void on_button8_1_clicked(GtkButton *b)
+{
+    gtk_widget_hide(window8);
     gtk_widget_show(window3);
+}
+void on_button9_1_clicked(GtkButton *b)
+{
+    for (int i = 0; i < 8; i++)
+    {
+        gtk_label_set_text((GtkLabel*) label8[0][i], "");
+        gtk_label_set_text((GtkLabel*) label8[0][i], "");
+        gtk_label_set_text((GtkLabel*) label8[0][i], "");
+        gtk_label_set_text((GtkLabel*) label8[0][i], "");
+    }
+    char tmp[100];
+    sprintf(tmp, "%s", gtk_entry_get_text((GtkEntry*) entry9_2));
+    
+    int invoiceFound = 0;
+	float total = 0;
+	orders order;
+    row = 0;
+	FILE *printBill = fopen("printBill.dat", "rb");
+	while(fread(&order, sizeof(struct orders), 1, printBill))
+	{
+		g_print("%s,%s\n", order.table, tmp);
+		if(!strcmp(order.table, tmp)){
+			for(int i=0; i<order.numOfItems; i++){
+				char tmp2[100];
+				strcpy(tmp2, "Table: ");
+				strcat(tmp2, order.table);
+				gtk_label_set_text((GtkLabel*) label8_4, tmp2);
+				strcpy(tmp2, order.date);
+				gtk_label_set_text((GtkLabel*) label8_5, tmp2);
+				strcpy(tmp2, "Customer's name: ");
+				strcat(tmp2, get_name(order.table));
+				gtk_label_set_text((GtkLabel*) label8_6, tmp2);
+    			char tmp3[100];
+    			sprintf(tmp3, "%s", gtk_entry_get_text((GtkEntry*) entry9_1));
+				strcpy(tmp2, "Staff's name: ");
+				strcat(tmp2, tmp3);
+				gtk_label_set_text((GtkLabel*) label8_8, tmp2);
+				total += order.itm[i].qty * order.itm[i].price;
+                char tmp4[100];
+                sprintf(tmp4, "%d", row + 1);
+                rowtext[0][row] = malloc(strlen(tmp4)+1);
+                strcpy(rowtext[0][row], tmp4);
+                rowtext[1][row] = malloc(strlen(order.itm[i].item)+1);
+                strcpy(rowtext[1][row], order.itm[i].item);
+                sprintf(tmp4, "x%d", order.itm[i].qty);
+                rowtext[2][row] = malloc(strlen(tmp4)+1);
+                strcpy(rowtext[2][row], tmp4);
+                sprintf(tmp4, "%.2f$ ", order.itm[i].qty * order.itm[i].price);
+                rowtext[3][row] = malloc(strlen(tmp4)+1);
+                strcpy(rowtext[3][row], tmp4);
+                if (row < 8)
+                {
+                    gtk_grid_insert_row(GTK_GRID(grid8_1), row);
+                    gtk_label_set_text((GtkLabel*) label8[0][row], rowtext[0][row]);
+                    gtk_label_set_text((GtkLabel*) label8[1][row], rowtext[1][row]);
+                    gtk_label_set_text((GtkLabel*) label8[2][row], rowtext[2][row]);
+                    gtk_label_set_text((GtkLabel*) label8[3][row], rowtext[3][row]);
+                    gtk_widget_set_name(label8[0][row], "label8");
+                    gtk_widget_set_name(label8[1][row], "label8");
+                    gtk_widget_set_name(label8[2][row], "label8");
+                    gtk_widget_set_name(label8[3][row], "label8");
+                    gtk_label_set_xalign((GtkLabel*) label8[1][row], 0.2);
+                    gtk_label_set_xalign((GtkLabel*) label8[1][row], 0);
+                    gtk_label_set_xalign((GtkLabel*) label8[2][row], 0);
+                    gtk_label_set_xalign((GtkLabel*) label8[3][row], 1);
+                    gtk_label_set_width_chars((GtkLabel*) label8[0][row], 4);
+                    gtk_label_set_width_chars((GtkLabel*) label8[1][row], 23);
+                    gtk_label_set_width_chars((GtkLabel*) label8[2][row], 4);
+                    gtk_label_set_width_chars((GtkLabel*) label8[3][row], 15);
+                    gtk_grid_attach(GTK_GRID(grid8_1), label8[0][row], 0, row, 1, 1);
+                    gtk_grid_attach(GTK_GRID(grid8_1), label8[1][row], 1, row, 1, 1);
+                    gtk_grid_attach(GTK_GRID(grid8_1), label8[2][row], 2, row, 1, 1);
+                    gtk_grid_attach(GTK_GRID(grid8_1), label8[3][row], 3, row, 1, 1);
+                }
+                row++;
+			}
+			invoiceFound = 1;
+
+            if (!strcmp(order.table, "1"))
+            {
+                gtk_widget_hide(button4_3);
+                gtk_widget_show(button4_2);
+                break;
+            }
+            if (!strcmp(order.table, "2"))
+            {    
+                gtk_widget_hide(button4_5);
+                gtk_widget_show(button4_4);
+                break;
+            }
+            if (!strcmp(order.table, "3"))
+            {    
+                gtk_widget_hide(button4_7);
+                gtk_widget_show(button4_6);
+                break;
+            }
+            if (!strcmp(order.table, "4"))
+            {    
+                gtk_widget_hide(button4_9);
+                gtk_widget_show(button4_8);
+                break;
+            }
+            if (!strcmp(order.table, "5"))
+            {
+                gtk_widget_hide(button4_11);
+                gtk_widget_show(button4_10);
+                break;
+            }
+            if (!strcmp(order.table, "6"))
+            {    
+                gtk_widget_hide(button4_13);
+                gtk_widget_show(button4_12);
+                break;
+            }
+            if (!strcmp(order.table, "7"))
+            {    
+                gtk_widget_hide(button4_15);
+                gtk_widget_show(button4_14);
+                break;
+            }
+            if (!strcmp(order.table, "8"))
+            {    
+                gtk_widget_hide(button4_17);
+                gtk_widget_show(button4_16);
+                break;
+            }
+            if (!strcmp(order.table, "9"))
+            {    
+                gtk_widget_hide(button4_19);
+                gtk_widget_show(button4_18);
+                break;
+            }
+            if (!strcmp(order.table, "10"))
+            {    
+                gtk_widget_hide(button4_21);
+                gtk_widget_show(button4_20);
+                break;
+            }
+            if (!strcmp(order.table, "11"))
+            {    
+                gtk_widget_hide(button4_23);
+                gtk_widget_show(button4_22);
+                break;
+            }
+            if (!strcmp(order.table, "12"))
+            {    
+                gtk_widget_hide(button4_25);
+                gtk_widget_show(button4_24);
+                break;
+            }
+            if (!strcmp(order.table, "13"))
+            {    
+                gtk_widget_hide(button4_27);
+                gtk_widget_show(button4_26);
+                break;
+            }
+		} else {
+			FILE *copyBill = fopen("copyBill.dat", "ab");
+			fwrite(&order, sizeof(struct orders), 1, copyBill);
+			fclose(copyBill);
+		}
+	}		        
+
+	if(!invoiceFound){
+		g_print("Sorry the invoice doesnot exists\n");
+	} else
+    {
+        char tmp2[100];
+        sprintf(tmp2, "%.2f", total);
+        strcat(tmp2, "$");
+        gtk_label_set_text((GtkLabel*) label8_12, tmp2);
+        sprintf(tmp2, "%.2f", total*0.04);
+        strcat(tmp2, "$");
+        gtk_label_set_text((GtkLabel*) label8_13, tmp2);
+        sprintf(tmp2, "%.2f", total*1.04);
+        strcat(tmp2, "$");
+        gtk_label_set_text((GtkLabel*) label8_14, tmp2);
+        gtk_widget_hide(window9);
+        gtk_widget_show_all(window8);
+    }
+	fclose(printBill);
+	FILE *fileDel = fopen("printBill.dat", "wb");
+	fwrite(NULL, sizeof(NULL), 1, fileDel);
+	fclose(fileDel);
+	// copy file
+	FILE *readCopy = fopen("copyBill.dat", "rb");
+	while(fread(&order, sizeof(struct orders), 1, readCopy)){
+		FILE *copyBill = fopen("printBill.dat", "ab");
+		fwrite(&order, sizeof(struct orders), 1, copyBill);
+		fclose(copyBill);
+	}
+	fclose(readCopy);
+	FILE *fileDel1 = fopen("copyBill.dat", "wb");
+	fwrite(NULL, sizeof(NULL), 1, fileDel1);
+	fclose(fileDel1);
+}
+void on_scrollbar8_1_value_changed(GtkRange *r)
+{
+    int i = (int) gtk_range_get_value(r);
+
+    if (i + 8 <= row)
+        for (int j = i; j < i + 8; j++)
+        {
+            g_print("%d, %d\n", j, row);
+            gtk_label_set_text((GtkLabel*) label8[0][j-i], rowtext[0][j]);
+            gtk_label_set_text((GtkLabel*) label8[1][j-i], rowtext[1][j]);
+            gtk_label_set_text((GtkLabel*) label8[2][j-i], rowtext[2][j]);
+            gtk_label_set_text((GtkLabel*) label8[3][j-i], rowtext[3][j]);
+        }
 }

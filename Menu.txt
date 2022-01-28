@@ -1,0 +1,10 @@
+beefsteak1 10
+beefsteak2 20
+beefsteak3 30
+beefsteak4 40
+beefsteak5 50
+beefsteak6 60
+beefsteak7 70
+beefsteak8 80
+beefsteak9 90
+beefsteak10 100
