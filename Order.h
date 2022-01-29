@@ -12,15 +12,15 @@ struct items {
 };
 typedef struct orders orders;
 struct orders {
-	char table[20];
-	char date[25];
+	char table[100];
+	char date[100];
 	int numOfItems;
-	items itm[500];
+	items itm[100];
 };
 void order();
-void printBill();
-void billHistory();
-void cusBill();
+void reset_bill();
+void report();
+int	check_day();
 
 void order(char table[20], int numOfItems, items itm[500])
 {
@@ -40,89 +40,67 @@ void order(char table[20], int numOfItems, items itm[500])
 			obj.numOfItems++;
         }
 	FILE *printBill;
-	printBill = fopen("printBill.dat", "ab");
+	printBill = fopen("dat/printBill.dat", "ab");
 	fwrite(&obj, sizeof(orders), 1, printBill);
 	fclose(printBill);
 	FILE *saveBill;
-	saveBill = fopen("RestaurantBill.dat", "ab");
+	saveBill = fopen("dat/RestaurantBill.dat", "ab");
 	fwrite(&obj, sizeof(orders), 1, saveBill);
 	fclose(saveBill);
+	g_print("%s\n", obj.date);
 }
 void reset_bill()
 {
 	FILE *del;
-	del = fopen("printBill.dat", "wb");
+	del = fopen("dat/printBill.dat", "wb");
 	fwrite(NULL, sizeof(NULL), 1, del);
 	fclose(del);
 }
-void printBill(char tbl[20])
+void report(char startDay[25], char endDay[25], char startMonth[25], char endMonth[25]) 
 {
-	
-}/*
-void billHistory() {
-	int i, numCus = 0;
+	int invoiceFound = 0, numCus = 0;
 	float grandTotal = 0;
-	struct orders order;
-	system("cls");
-	FILE *billHis = fopen("RestaurantBill.dat", "rb");
-	while(fread(&order, sizeof(struct orders), 1, billHis)){
+	float income = 0;
+	orders order;
+	FILE *findBill = fopen("dat/RestaurantBill.dat", "rb");
+	FILE *findBillCsv = fopen("RestaurantBill.csv", "w");
+	fprintf(findBillCsv,"Time, Number, Name, Price\n");
+	while(fread(&order, sizeof(orders), 1, findBill)){
+		char cusTime[50];
+    	char *month, *day;
 		float total = 0;
-		for(i=0; i<order.numOfItems; i++){
-			total += order.itm[i].qty * order.itm[i].price;
-		}
-		generateBillFooter(total);
-		numCus++;
-		grandTotal += total;
-	}
-	fclose(billHis);
-	printf("\nnum of cus: %d\ngrand total: %f", numCus, grandTotal + grandTotal / 25);
-	getch();
-	menu();
-}
-void cusBill() {
-	int i, invoiceFound = 0, numCus;
-	float grandTotal = 0;
-	char month[20];
-	struct orders order;
-	printf("Enter the month (Jan): ");
-	//get month
-	fflush(stdin);
-	gets(month);
-	system("cls");
-	FILE *findBill = fopen("RestaurantBill.dat", "rb");
-	while(fread(&order, sizeof(struct orders), 1, findBill)){
-		char mth[50];
-    	char sep[] = " ,\t\n";
-    	char *token;
-		float total = 0;
-		
-		strcpy(mth, order.date);
-    	token = strtok(mth, sep);
-    	while( token != NULL )
-    	{
-        	// Get next token: 
-        	token = strtok( NULL, sep);
-        	// While there are tokens in "string"
-        	break;
-    	}
-		if(!strcmp(token, month)){
-			generateBillHeader(order.customer, order.date);
-			for(i=0; i<order.numOfItems; i++){
-				generateBillBody(order.itm[i].item, order.itm[i].qty, order.itm[i].price);
+
+		strcpy(cusTime, order.date);
+    	month = strtok(cusTime, " ");
+    	month = strtok( NULL, " ");
+    	day = strtok( NULL, " ");
+		g_print("%s,%s\n", month, day);
+		g_print("%d,%d\n", check_day(day, month), check_day(startDay, startMonth));
+		g_print("%d,%d\n", check_day(day, month), check_day(endDay, endMonth));
+		if(check_day(day, month) >= check_day(startDay, startMonth) &&
+			check_day(day, month) <= check_day(endDay, endMonth))
+		{
+			fprintf(findBillCsv,"%s", order.date);
+			for(int i=0; i<order.numOfItems; i++){
+				fprintf(findBillCsv,",%d,%s",order.itm[i].qty,order.itm[i].item);
 				total += order.itm[i].qty * order.itm[i].price;
+				fprintf(findBillCsv,",%.2f$\n", order.itm[i].qty * order.itm[i].price);
 			}
-			generateBillFooter(total);
-			invoiceFound = 1;
-			numCus++;
+			fprintf(findBillCsv,"Tax(4%),,,%.2f$\n", total * 0.04);
+			fprintf(findBillCsv,"Total,,,%.2f$\n", total + total * 0.04);
+           	numCus++;
 			grandTotal += total;
-		}		
+
+		}
 	}
+    income += grandTotal + grandTotal * 0.04;
+	fprintf(findBillCsv,"\nNumber of Customer : %d\n", numCus);
+ 	fprintf(findBillCsv,"\nTotal Income : %.2f$\n", income);
 	if(!invoiceFound){
 		printf("Sorry the invoice doesnot exists");
 	} else {
-		printf("\nnum of cus: %d\ngrand total: %f", numCus, grandTotal + grandTotal / 25);
+		printf("\nNum of cus: %d\ngrand total: %.2f$", numCus, grandTotal + grandTotal / 25);
 	}
 	fclose(findBill);
-	getch();
-	menu();
-}*/
+	fclose(findBillCsv);
+}

@@ -52,5 +52,58 @@ bool str_check2(char *str1)
     }
     return 1;
 }
+int check_day(char day[25], char month[25])
+{
+	int tmp = atoi(day);
+	if (!strcmp(month, "Jan"))
+	{
+		tmp += 40*1;
+	}
+	if (!strcmp(month, "Feb"))
+	{
+		tmp += 40*2;
+	}
+	if (!strcmp(month, "Mar"))
+	{
+		tmp += 40*3;
+	}
+	if (!strcmp(month, "Apr"))
+	{
+		tmp += 40*4;
+	}
+	if (!strcmp(month, "May"))
+	{
+		tmp += 40*5;
+	}
+	if (!strcmp(month, "Jun"))
+	{
+		tmp += 40*6;
+	}
+	if (!strcmp(month, "Jul"))
+	{
+		tmp += 40*7;
+	}
+	if (!strcmp(month, "Aug"))
+	{
+		tmp += 40*8;
+	}
+	if (!strcmp(month, "Sep"))
+	{
+		tmp += 40*9;
+	}
+	if (!strcmp(month, "Oct"))
+	{
+		tmp += 40*10;
+	}
+	if (!strcmp(month, "Nov"))
+	{
+		tmp += 40*11;
+	}
+	if (!strcmp(month, "Dec"))
+	{
+		tmp += 40*12;
+	}
+	return tmp;
+}
 
 #endif

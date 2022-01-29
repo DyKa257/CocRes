@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lib.h"
-#define fin_1 "list_goods.txt"
+#define fin_1 "list_goods.csv"
 
 //========= class List_Goods =========//
 
@@ -99,13 +99,10 @@ void Inp_Goods(List_Goods *obj)
         fscanf(inp, "%s", &tmp);
         for (int i = 0; i < strlen(tmp); i++)
             tmp1[i] = tmp[i];
-        char *name = malloc(sizeof(char));
-        name = strtok(tmp1, ",");
-        char *num_char = malloc(sizeof(char));
-        num_char = strtok(NULL, ",");
+        char *name = strtok(tmp1, ",");
+        char *num_char =strtok(NULL, ",");
         int num = str_to_int(num_char);
-        char *unit = malloc(sizeof(char));
-        unit = strtok(NULL, ",");
+        char *unit = strtok(NULL, "\n");
         obj->add(obj, name, num, unit);
     }
     fclose(inp);
@@ -118,11 +115,11 @@ void Out_Goods(List_Goods *obj)
     {
         fprintf(out, "%s,", list_goods->name);
         fprintf(out, "%d,", list_goods->num);
-        fprintf(out, "%s,\n", list_goods->unit);
+        fprintf(out, "%s\n", list_goods->unit);
     }
     fprintf(out, "%s,", list_goods->name);
     fprintf(out, "%d,", list_goods->num);
-    fprintf(out, "%s,", list_goods->unit);
+    fprintf(out, "%s", list_goods->unit);
     fclose(out);
 }
 void Destroy_Goods(List_Goods *obj)

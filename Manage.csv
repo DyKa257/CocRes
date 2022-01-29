@@ -1,0 +1,16 @@
+Import:
+Time, Name, Number, Unit
+Sun Jan 30 00:46:40 2022
+,ginger,1000,grams
+Sun Jan 30 00:46:56 2022
+,carrot,1000,grams
+Sun Jan 30 00:47:01 2022
+,beef,1000,grams
+Sun Jan 30 00:47:06 2022
+,coconot,1000,grams
+Export:
+Time, Name, Number, Unit
+Sun Jan 30 00:46:56 2022
+,carrot,220,grams
+Sun Jan 30 00:46:40 2022
+,ginger,0,grams
