@@ -163,7 +163,6 @@ int main (int argc,char *argv[])
     window11 = GTK_WIDGET(gtk_builder_get_object (builder, "window11"));
     window12 = GTK_WIDGET(gtk_builder_get_object (builder, "window12"));
     window13 = GTK_WIDGET(gtk_builder_get_object (builder, "window13"));
-    gtk_widget_set_name(window4, "window4");
 
     g_signal_connect(window1, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     g_signal_connect(window2, "destroy", G_CALLBACK (gtk_main_quit), NULL);
@@ -182,9 +181,6 @@ int main (int argc,char *argv[])
     button2_1 = GTK_WIDGET(gtk_builder_get_object (builder, "button2_1"));
     button2_2 = GTK_WIDGET(gtk_builder_get_object (builder, "button2_2"));
     label2_4 = GTK_WIDGET(gtk_builder_get_object (builder, "label2_4"));
-    gtk_widget_set_name(button2_1, "button2_1");
-    gtk_widget_set_name(button2_2, "button2_2");
-    gtk_widget_set_name(entry2_1, "entry2_1");
 
     button3_1 = GTK_WIDGET(gtk_builder_get_object (builder, "button3_1"));
     button3_2 = GTK_WIDGET(gtk_builder_get_object (builder, "button3_2"));

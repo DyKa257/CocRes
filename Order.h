@@ -26,7 +26,6 @@ void order(char table[20], int numOfItems, items itm[500])
 {
 	orders obj;
 
-
 	time_t t;
 	time(&t);
 	strcpy(obj.date, ctime(&t));
