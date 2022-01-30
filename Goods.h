@@ -48,9 +48,10 @@ int check_goods(char name[20], int num, char unit[20])
     FILE *goodsf = fopen("dat/Goods.dat", "rb");
 	while(fread(&obj, sizeof(Goods), 1, goodsf))
     {
-        g_print("%s,%d,%s\n", obj.name, obj.num, name);
+        g_print("%s,%d,%d,%s\n", obj.name, obj.num, num, name);
         if (!strcmp(name, obj.name)) num -= obj.num;
     }
+    g_print("%d\n", num);
     if (num <= 0) return 1; else return 0;
     fclose(goodsf);
 }
@@ -58,17 +59,15 @@ void export_goods(char name[20], int num, char unit[20])
 {
     Goods obj;
 
-    if (num == 0) return;
-
     FILE *goodsf = fopen("dat/Goods.dat", "rb");
 	while(fread(&obj, sizeof(Goods), 1, goodsf))
     {
-		if(!strcmp(obj.name, name))
+		if(!strcmp(obj.name, name) && num > 0)
         {
             if (obj.num > num)
             {
                 obj.num -= num;
-                g_print("%s, %d, %d\n", name, num, obj.num);
+                g_print("1: %s, %s, %d\n", obj.name, name, obj.num);
                 FILE *copyGoods = fopen("dat/copyGoods.dat", "ab");
                 fwrite(&obj, sizeof(Goods), 1, copyGoods);
                 fclose(copyGoods);
@@ -77,15 +76,18 @@ void export_goods(char name[20], int num, char unit[20])
                 FILE *export = fopen("dat/Export.dat", "ab");
                 fwrite(&tmp, sizeof(Goods), 1, export);
                 fclose(export);
-                break;
+                num = 0;
             } else
             {
+                num -= obj.num;
+                g_print("2: %s, %s, %d\n", obj.name, name, obj.num);
                 FILE *export = fopen("dat/Export.dat", "ab");
                 fwrite(&obj, sizeof(Goods), 1, export);
                 fclose(export);
             }
 		} else
         {
+            g_print("3: %s, %s, %d\n", obj.name, name, obj.num);
             FILE *copyGoods = fopen("dat/copyGoods.dat", "ab");
             fwrite(&obj, sizeof(Goods), 1, copyGoods);
             fclose(copyGoods);
@@ -98,6 +100,7 @@ void export_goods(char name[20], int num, char unit[20])
 	// copy file
 	FILE *readCopy = fopen("dat/copyGoods.dat", "rb");
 	while(fread(&obj, sizeof(Goods), 1, readCopy)){
+        g_print("4: %s, %s, %d\n", obj.name, name, obj.num);
 		FILE *copyGoods = fopen("dat/Goods.dat", "ab");
 		fwrite(&obj, sizeof(Goods), 1, copyGoods);
 		fclose(copyGoods);

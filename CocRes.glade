@@ -374,6 +374,7 @@
     <property name="resizable">False</property>
     <property name="window-position">center-always</property>
     <property name="icon">png\CocRes.png</property>
+    <property name="deletable">False</property>
     <property name="gravity">static</property>
     <child>
       <object class="GtkFixed" id="fixed6">
@@ -1412,6 +1413,7 @@
     <property name="height-request">400</property>
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">CocRes</property>
+    <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="icon">png\CocRes.png</property>
     <child>
@@ -1849,8 +1851,10 @@
     <property name="height-request">400</property>
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">CocRes</property>
+    <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="icon">png\CocRes.png</property>
+    <property name="deletable">False</property>
     <child>
       <object class="GtkFixed" id="fixed11">
         <property name="visible">True</property>
@@ -1929,6 +1933,7 @@
     <property name="modal">True</property>
     <property name="window-position">center</property>
     <property name="icon">png\CocRes.png</property>
+    <property name="deletable">False</property>
     <child>
       <object class="GtkFixed" id="fixed12">
         <property name="visible">True</property>
@@ -2091,8 +2096,10 @@
     <property name="height-request">500</property>
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">CocRes</property>
+    <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="icon">png\CocRes.png</property>
+    <property name="deletable">False</property>
     <child>
       <object class="GtkFixed" id="fixed13">
         <property name="visible">True</property>
@@ -2420,8 +2427,10 @@
     <property name="height-request">400</property>
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">CocRes</property>
+    <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="icon">png\CocRes.png</property>
+    <property name="deletable">False</property>
     <child>
       <object class="GtkFixed" id="fixed2">
         <property name="visible">True</property>
@@ -2543,8 +2552,10 @@
     <property name="height-request">400</property>
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">CocRes</property>
+    <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="icon">png\CocRes.png</property>
+    <property name="deletable">False</property>
     <child>
       <object class="GtkFixed" id="fixed3">
         <property name="width-request">755</property>
@@ -2674,6 +2685,7 @@
     <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="icon">png\CocRes.png</property>
+    <property name="deletable">False</property>
     <child>
       <object class="GtkFixed" id="fixed4">
         <property name="width-request">32</property>

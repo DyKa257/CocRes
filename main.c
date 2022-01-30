@@ -597,7 +597,7 @@ void on_button7_1_clicked(GtkButton *b)
 {
     char tmp1[100], tmp2[100];
     sprintf(tmp1, "%s", gtk_entry_get_text((GtkEntry*) entry7_1));
-    sprintf(tmp2, "%s", gtk_entry_get_text((GtkEntry*) entry7_2));
+    sprintf(tmp2, "%s", gtk_entry_get_text((GtkEntry*) entry7_2));  
     if(!check_table(tmp1, tmp2))
     {
         gtk_label_set_text((GtkLabel*) label7_4, "Invalid Table or Phone number!");
@@ -691,11 +691,13 @@ void on_button9_1_clicked(GtkButton *b)
 	float total = 0;
 	orders order;
     row = 0;
-	FILE *printBill = fopen("printBill.dat", "rb");
+	g_print("%s,%s\n", "A", tmp);
+	FILE *printBill = fopen("dat/printBill.dat", "rb");
 	while(fread(&order, sizeof(struct orders), 1, printBill))
 	{
 		g_print("%s,%s\n", order.table, tmp);
-		if(!strcmp(order.table, tmp)){
+		if(!strcmp(order.table, tmp))
+        {
 			for(int i=0; i<order.numOfItems; i++){
 				char tmp2[100];
 				strcpy(tmp2, "Table: ");
@@ -831,7 +833,7 @@ void on_button9_1_clicked(GtkButton *b)
                 break;
             }
 		} else {
-			FILE *copyBill = fopen("copyBill.dat", "ab");
+			FILE *copyBill = fopen("dat/copyBill.dat", "ab");
 			fwrite(&order, sizeof(struct orders), 1, copyBill);
 			fclose(copyBill);
 		}
@@ -855,18 +857,18 @@ void on_button9_1_clicked(GtkButton *b)
         gtk_widget_show_all(window8);
     }
 	fclose(printBill);
-	FILE *fileDel = fopen("printBill.dat", "wb");
+	FILE *fileDel = fopen("dat/printBill.dat", "wb");
 	fwrite(NULL, sizeof(NULL), 1, fileDel);
 	fclose(fileDel);
 	// copy file
-	FILE *readCopy = fopen("copyBill.dat", "rb");
+	FILE *readCopy = fopen("dat/copyBill.dat", "rb");
 	while(fread(&order, sizeof(struct orders), 1, readCopy)){
-		FILE *copyBill = fopen("printBill.dat", "ab");
+		FILE *copyBill = fopen("dat/printBill.dat", "ab");
 		fwrite(&order, sizeof(struct orders), 1, copyBill);
 		fclose(copyBill);
 	}
 	fclose(readCopy);
-	FILE *fileDel1 = fopen("copyBill.dat", "wb");
+	FILE *fileDel1 = fopen("dat/copyBill.dat", "wb");
 	fwrite(NULL, sizeof(NULL), 1, fileDel1);
 	fclose(fileDel1);
 }
@@ -906,6 +908,9 @@ void on_button12_1_clicked(GtkButton *b)
     sprintf(tmp1, "%s", gtk_entry_get_text((GtkEntry*) entry12_1));
     sprintf(tmp2, "%s", gtk_entry_get_text((GtkEntry*) entry12_2));
     sprintf(tmp3, "%s", gtk_entry_get_text((GtkEntry*) entry12_3));
+    gtk_entry_set_text((GtkEntry*) entry12_1, "");
+    gtk_entry_set_text((GtkEntry*) entry12_2, "");
+    gtk_entry_set_text((GtkEntry*) entry12_3, "");
     import_goods(tmp1, atoi(tmp2), tmp3);
 }
 void on_button12_2_clicked(GtkButton *b)

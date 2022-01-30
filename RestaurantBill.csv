@@ -1,0 +1,18 @@
+Time, Number, Name, Price
+Sun Jan 30 16:31:00 2022
+,1,carrotsoup,10.00$
+,1,gingerbeef,15.00$
+,1,beefstew,20.00$
+,1,coconutrice,10.00$
+,1,macaroons,5.00$
+,1,carrotcake,15.00$
+,1,coconutsmoothie,3.00$
+,1,carrotginger,3.00$
+,1,gingertea,3.00$
+,1,coconutvanilla,3.00$
+Tax(4%),,,3.48$
+Total,,,90.48$
+
+Number of Customer : 1
+
+Total Income : 90.48$
