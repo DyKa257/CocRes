@@ -26,6 +26,7 @@ void order(char table[20], int numOfItems, items itm[500])
 {
 	orders obj;
 
+
 	time_t t;
 	time(&t);
 	strcpy(obj.date, ctime(&t));
@@ -36,7 +37,7 @@ void order(char table[20], int numOfItems, items itm[500])
         {
             strcpy(obj.itm[obj.numOfItems].item, itm[i].item);    
             obj.itm[obj.numOfItems].price = itm[i].price;
-            obj.itm[obj.numOfItems].qty = itm[i].qty;            
+            obj.itm[obj.numOfItems].qty = itm[i].qty;    
 			obj.numOfItems++;
         }
 	FILE *printBill;
@@ -47,7 +48,6 @@ void order(char table[20], int numOfItems, items itm[500])
 	saveBill = fopen("dat/RestaurantBill.dat", "ab");
 	fwrite(&obj, sizeof(orders), 1, saveBill);
 	fclose(saveBill);
-	g_print("%s\n", obj.date);
 }
 void reset_bill()
 {
@@ -74,9 +74,6 @@ void report(char startDay[25], char endDay[25], char startMonth[25], char endMon
     	month = strtok(cusTime, " ");
     	month = strtok( NULL, " ");
     	day = strtok( NULL, " ");
-		g_print("%s,%s\n", month, day);
-		g_print("%d,%d\n", check_day(day, month), check_day(startDay, startMonth));
-		g_print("%d,%d\n", check_day(day, month), check_day(endDay, endMonth));
 		if(check_day(day, month) >= check_day(startDay, startMonth) &&
 			check_day(day, month) <= check_day(endDay, endMonth))
 		{

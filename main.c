@@ -617,7 +617,6 @@ void on_button7_1_clicked(GtkButton *b)
         tmp[7].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_8));
         tmp[8].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_9));
         tmp[9].qty = (int)gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin6_10));
-        g_print("%s\n", tmp2);
         
         if (check_goods("carrot", 220 * (tmp[0].qty + tmp[2].qty + tmp[5].qty + tmp[7].qty), "grams") &&
             check_goods("ginger", 53 * (tmp[1].qty + tmp[7].qty + tmp[8].qty), "grams") &&
@@ -668,7 +667,6 @@ void on_scrollbar8_1_value_changed(GtkRange *r)
     if (i + 8 <= row)
         for (int j = i; j < i + 8; j++)
         {
-            g_print("%d, %d\n", j, row);
             gtk_label_set_text((GtkLabel*) label8[0][j-i], rowtext[0][j]);
             gtk_label_set_text((GtkLabel*) label8[1][j-i], rowtext[1][j]);
             gtk_label_set_text((GtkLabel*) label8[2][j-i], rowtext[2][j]);
@@ -691,9 +689,8 @@ void on_button9_1_clicked(GtkButton *b)
 	float total = 0;
 	orders order;
     row = 0;
-	g_print("%s,%s\n", "A", tmp);
 	FILE *printBill = fopen("dat/printBill.dat", "rb");
-	while(fread(&order, sizeof(struct orders), 1, printBill))
+	while(fread(&order, sizeof(orders), 1, printBill))
 	{
 		g_print("%s,%s\n", order.table, tmp);
 		if(!strcmp(order.table, tmp))
@@ -758,79 +755,66 @@ void on_button9_1_clicked(GtkButton *b)
             {
                 gtk_widget_hide(button4_3);
                 gtk_widget_show(button4_2);
-                break;
             }
             if (!strcmp(order.table, "2"))
             {    
                 gtk_widget_hide(button4_5);
                 gtk_widget_show(button4_4);
-                break;
             }
             if (!strcmp(order.table, "3"))
             {    
                 gtk_widget_hide(button4_7);
                 gtk_widget_show(button4_6);
-                break;
             }
             if (!strcmp(order.table, "4"))
             {    
                 gtk_widget_hide(button4_9);
                 gtk_widget_show(button4_8);
-                break;
             }
             if (!strcmp(order.table, "5"))
             {
                 gtk_widget_hide(button4_11);
                 gtk_widget_show(button4_10);
-                break;
             }
             if (!strcmp(order.table, "6"))
             {    
                 gtk_widget_hide(button4_13);
                 gtk_widget_show(button4_12);
-                break;
             }
             if (!strcmp(order.table, "7"))
             {    
                 gtk_widget_hide(button4_15);
                 gtk_widget_show(button4_14);
-                break;
             }
             if (!strcmp(order.table, "8"))
             {    
                 gtk_widget_hide(button4_17);
                 gtk_widget_show(button4_16);
-                break;
             }
             if (!strcmp(order.table, "9"))
             {    
                 gtk_widget_hide(button4_19);
                 gtk_widget_show(button4_18);
-                break;
             }
             if (!strcmp(order.table, "10"))
             {    
                 gtk_widget_hide(button4_21);
                 gtk_widget_show(button4_20);
-                break;
             }
             if (!strcmp(order.table, "11"))
             {    
                 gtk_widget_hide(button4_23);
                 gtk_widget_show(button4_22);
-                break;
             }
             if (!strcmp(order.table, "12"))
             {    
                 gtk_widget_hide(button4_25);
                 gtk_widget_show(button4_24);
-                break;
             }
             if (!strcmp(order.table, "13"))
             {    
                 gtk_widget_hide(button4_27);
                 gtk_widget_show(button4_26);
-                break;
             }
 		} else {
 			FILE *copyBill = fopen("dat/copyBill.dat", "ab");
@@ -838,7 +822,7 @@ void on_button9_1_clicked(GtkButton *b)
 			fclose(copyBill);
 		}
 	}		        
-
+    g_print("A\n");
 	if(!invoiceFound){
 		g_print("Sorry the invoice doesnot exists\n");
 	} else

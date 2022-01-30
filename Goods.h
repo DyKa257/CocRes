@@ -25,13 +25,10 @@ void import_goods(char name[20], int num, char unit[20])
     obj.num = num;
     strcpy(obj.unit, unit);
 
-    g_print("%s,%d,%s\n", obj.name, obj.num, obj.unit);
 	time_t t;
 	time(&t);
-    g_print("%s,%d,%s\n", obj.name, obj.num, obj.unit);
 	strcpy(obj.date, ctime(&t));
 
-    g_print("%s,%d,%s\n", obj.name, obj.num, obj.unit);
 	FILE *goodsf;
 	goodsf = fopen("dat/Goods.dat", "ab");
 	fwrite(&obj, sizeof(Goods), 1, goodsf);
@@ -48,10 +45,8 @@ int check_goods(char name[20], int num, char unit[20])
     FILE *goodsf = fopen("dat/Goods.dat", "rb");
 	while(fread(&obj, sizeof(Goods), 1, goodsf))
     {
-        g_print("%s,%d,%d,%s\n", obj.name, obj.num, num, name);
         if (!strcmp(name, obj.name)) num -= obj.num;
     }
-    g_print("%d\n", num);
     if (num <= 0) return 1; else return 0;
     fclose(goodsf);
 }
@@ -67,7 +62,6 @@ void export_goods(char name[20], int num, char unit[20])
             if (obj.num > num)
             {
                 obj.num -= num;
-                g_print("1: %s, %s, %d\n", obj.name, name, obj.num);
                 FILE *copyGoods = fopen("dat/copyGoods.dat", "ab");
                 fwrite(&obj, sizeof(Goods), 1, copyGoods);
                 fclose(copyGoods);
@@ -80,14 +74,12 @@ void export_goods(char name[20], int num, char unit[20])
             } else
             {
                 num -= obj.num;
-                g_print("2: %s, %s, %d\n", obj.name, name, obj.num);
                 FILE *export = fopen("dat/Export.dat", "ab");
                 fwrite(&obj, sizeof(Goods), 1, export);
                 fclose(export);
             }
 		} else
         {
-            g_print("3: %s, %s, %d\n", obj.name, name, obj.num);
             FILE *copyGoods = fopen("dat/copyGoods.dat", "ab");
             fwrite(&obj, sizeof(Goods), 1, copyGoods);
             fclose(copyGoods);
@@ -100,7 +92,6 @@ void export_goods(char name[20], int num, char unit[20])
 	// copy file
 	FILE *readCopy = fopen("dat/copyGoods.dat", "rb");
 	while(fread(&obj, sizeof(Goods), 1, readCopy)){
-        g_print("4: %s, %s, %d\n", obj.name, name, obj.num);
 		FILE *copyGoods = fopen("dat/Goods.dat", "ab");
 		fwrite(&obj, sizeof(Goods), 1, copyGoods);
 		fclose(copyGoods);
@@ -128,7 +119,6 @@ void report2(char startDay[25], char endDay[25], char startMonth[25], char endMo
     	month = strtok( NULL, " ");    	
         day = strtok( NULL, " ");
 
-        g_print(",%s,%d,%s\n", obj.name, obj.num, obj.unit);
 		if(check_day(day, month) >= check_day(startDay, startMonth) &&
 			check_day(day, month) <= check_day(endDay, endMonth))
 		{
@@ -153,7 +143,6 @@ void report2(char startDay[25], char endDay[25], char startMonth[25], char endMo
     	month = strtok( NULL, " ");    	
         day = strtok( NULL, " ");
 
-        g_print(",%s,%d,%s\n", obj.name, obj.num, obj.unit);
 		if(check_day(day, month) >= check_day(startDay, startMonth) &&
 			check_day(day, month) <= check_day(endDay, endMonth))
 		{
