@@ -1,18 +1,209 @@
 Time, Number, Name, Price
-Sun Jan 30 16:31:00 2022
+Sun Jan 30 16:43:02 2022
+,1,beefstew,20.00$
+,1,coconutrice,10.00$
+,1,macaroons,5.00$
+Tax(4%),,,1.40$
+Total,,,36.40$
+Sun Jan 30 16:43:08 2022
+,1,carrotcake,15.00$
+,1,carrotginger,3.00$
+Tax(4%),,,0.72$
+Total,,,18.72$
+Sun Jan 30 16:47:44 2022
 ,1,carrotsoup,10.00$
 ,1,gingerbeef,15.00$
 ,1,beefstew,20.00$
 ,1,coconutrice,10.00$
 ,1,macaroons,5.00$
-,1,carrotcake,15.00$
+Tax(4%),,,2.40$
+Total,,,62.40$
+Sun Jan 30 16:47:50 2022
 ,1,coconutsmoothie,3.00$
 ,1,carrotginger,3.00$
 ,1,gingertea,3.00$
+Tax(4%),,,0.36$
+Total,,,9.36$
+Sun Jan 30 16:50:31 2022
+,1,carrotsoup,10.00$
+,1,beefstew,20.00$
+,1,macaroons,5.00$
+,1,carrotcake,15.00$
+,1,coconutsmoothie,3.00$
+,1,gingertea,3.00$
+Tax(4%),,,2.24$
+Total,,,58.24$
+Sun Jan 30 16:56:10 2022
+,1,carrotsoup,10.00$
+,2,beefstew,40.00$
+,2,macaroons,10.00$
+,1,coconutsmoothie,3.00$
+,2,gingertea,6.00$
+Tax(4%),,,2.76$
+Total,,,71.76$
+Sun Jan 30 16:57:45 2022
+,2,carrotsoup,20.00$
+,2,beefstew,40.00$
+,2,macaroons,10.00$
+Tax(4%),,,2.80$
+Total,,,72.80$
+Sun Jan 30 16:57:50 2022
+,3,carrotginger,9.00$
+,3,coconutvanilla,9.00$
+Tax(4%),,,0.72$
+Total,,,18.72$
+Sun Jan 30 17:02:07 2022
+,3,beefstew,60.00$
+,3,macaroons,15.00$
+,3,carrotginger,9.00$
+Tax(4%),,,3.36$
+Total,,,87.36$
+Sun Jan 30 17:03:01 2022
+,3,macaroons,15.00$
+,3,carrotcake,45.00$
+,3,coconutsmoothie,9.00$
+Tax(4%),,,2.76$
+Total,,,71.76$
+Sun Jan 30 17:05:13 2022
+,2,carrotsoup,20.00$
+,1,beefstew,20.00$
+Tax(4%),,,1.60$
+Total,,,41.60$
+Sun Jan 30 17:05:19 2022
+,2,macaroons,10.00$
+,1,carrotginger,3.00$
+Tax(4%),,,0.52$
+Total,,,13.52$
+Sun Jan 30 17:27:30 2022
+,2,carrotsoup,20.00$
+,1,beefstew,20.00$
+,1,coconutrice,10.00$
+,1,coconutsmoothie,3.00$
 ,1,coconutvanilla,3.00$
-Tax(4%),,,3.48$
-Total,,,90.48$
+Tax(4%),,,2.24$
+Total,,,58.24$
+Sun Jan 30 17:29:44 2022
+,2,carrotsoup,20.00$
+,1,beefstew,20.00$
+,2,macaroons,10.00$
+,1,coconutvanilla,3.00$
+Tax(4%),,,2.12$
+Total,,,55.12$
+Sun Jan 30 17:33:13 2022
+,1,carrotsoup,10.00$
+,1,coconutrice,10.00$
+,1,macaroons,5.00$
+,1,carrotginger,3.00$
+,1,gingertea,3.00$
+Tax(4%),,,1.24$
+Total,,,32.24$
+Sun Jan 30 17:36:47 2022
+,1,carrotsoup,10.00$
+,1,coconutrice,10.00$
+,1,carrotcake,15.00$
+,2,coconutsmoothie,6.00$
+,1,coconutvanilla,3.00$
+Tax(4%),,,1.76$
+Total,,,45.76$
+Sun Jan 30 17:37:18 2022
+,2,gingerbeef,30.00$
+,1,beefstew,20.00$
+,2,macaroons,10.00$
+,1,carrotginger,3.00$
+,1,gingertea,3.00$
+Tax(4%),,,2.64$
+Total,,,68.64$
+Sun Jan 30 17:41:42 2022
+,2,carrotsoup,20.00$
+,1,coconutrice,10.00$
+,2,coconutsmoothie,6.00$
+,1,gingertea,3.00$
+Tax(4%),,,1.56$
+Total,,,40.56$
+Sun Jan 30 17:42:12 2022
+,2,gingerbeef,30.00$
+,1,coconutrice,10.00$
+,1,macaroons,5.00$
+,2,carrotginger,6.00$
+,1,gingertea,3.00$
+Tax(4%),,,2.16$
+Total,,,56.16$
+Sun Jan 30 17:44:06 2022
+,2,carrotsoup,20.00$
+,1,beefstew,20.00$
+,2,carrotcake,30.00$
+,1,coconutsmoothie,3.00$
+,2,coconutvanilla,6.00$
+Tax(4%),,,3.16$
+Total,,,82.16$
+Sun Jan 30 17:44:35 2022
+,2,gingerbeef,30.00$
+,1,coconutrice,10.00$
+,2,macaroons,10.00$
+,1,coconutsmoothie,3.00$
+,2,coconutvanilla,6.00$
+Tax(4%),,,2.36$
+Total,,,61.36$
+Sun Jan 30 17:47:23 2022
+,2,beefstew,40.00$
+,1,carrotcake,15.00$
+,3,coconutsmoothie,9.00$
+Tax(4%),,,2.56$
+Total,,,66.56$
+Sun Jan 30 17:49:02 2022
+,3,carrotsoup,30.00$
+,1,gingerbeef,15.00$
+,2,beefstew,40.00$
+,3,coconutrice,30.00$
+,1,macaroons,5.00$
+,2,carrotcake,30.00$
+,2,coconutsmoothie,6.00$
+,2,carrotginger,6.00$
+,4,gingertea,12.00$
+,2,coconutvanilla,6.00$
+Tax(4%),,,7.20$
+Total,,,187.20$
+Sun Jan 30 17:51:01 2022
+,2,carrotsoup,20.00$
+,2,coconutrice,20.00$
+,1,carrotcake,15.00$
+,2,coconutsmoothie,6.00$
+,1,gingertea,3.00$
+Tax(4%),,,2.56$
+Total,,,66.56$
+Sun Jan 30 17:51:53 2022
+,2,carrotsoup,20.00$
+,2,beefstew,40.00$
+,1,carrotcake,15.00$
+,3,coconutsmoothie,9.00$
+,2,gingertea,6.00$
+Tax(4%),,,3.60$
+Total,,,93.60$
+Sun Jan 30 17:52:22 2022
+,2,gingerbeef,30.00$
+,1,coconutrice,10.00$
+,3,macaroons,15.00$
+,1,coconutsmoothie,3.00$
+,2,carrotginger,6.00$
+Tax(4%),,,2.56$
+Total,,,66.56$
+Sun Jan 30 17:53:44 2022
+,2,carrotsoup,20.00$
+,2,beefstew,40.00$
+,2,carrotcake,30.00$
+,1,coconutsmoothie,3.00$
+,3,coconutvanilla,9.00$
+Tax(4%),,,4.08$
+Total,,,106.08$
+Sun Jan 30 17:54:15 2022
+,1,carrotsoup,10.00$
+,1,coconutrice,10.00$
+,2,carrotcake,30.00$
+,2,coconutsmoothie,6.00$
+,3,coconutvanilla,9.00$
+Tax(4%),,,2.60$
+Total,,,67.60$
 
-Number of Customer : 1
+Number of Customer : 28
 
-Total Income : 90.48$
+Total Income : 1717.04$

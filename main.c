@@ -730,7 +730,7 @@ void on_button9_1_clicked(GtkButton *b)
                     gtk_widget_set_name(label8[1][row], "label8");
                     gtk_widget_set_name(label8[2][row], "label8");
                     gtk_widget_set_name(label8[3][row], "label8");
-                    gtk_label_set_xalign((GtkLabel*) label8[1][row], 0.2);
+                    gtk_label_set_xalign((GtkLabel*) label8[0][row], 0.2);
                     gtk_label_set_xalign((GtkLabel*) label8[1][row], 0);
                     gtk_label_set_xalign((GtkLabel*) label8[2][row], 0);
                     gtk_label_set_xalign((GtkLabel*) label8[3][row], 1);
@@ -851,6 +851,8 @@ void on_button9_1_clicked(GtkButton *b)
 	FILE *fileDel1 = fopen("dat/copyBill.dat", "wb");
 	fwrite(NULL, sizeof(NULL), 1, fileDel1);
 	fclose(fileDel1);
+    gtk_entry_set_text((GtkEntry*) entry9_1, "");
+    gtk_entry_set_text((GtkEntry*) entry9_2, "");
 }
 void on_button9_2_clicked(GtkButton *b)
 {
