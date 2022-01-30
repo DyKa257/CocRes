@@ -531,7 +531,7 @@
                             <property name="width-request">50</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">30$</property>
+                            <property name="label" translatable="yes">10$</property>
                             <attributes>
                               <attribute name="font-desc" value="Sans Bold 13"/>
                             </attributes>
@@ -620,7 +620,7 @@
                             <property name="width-request">50</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">30$</property>
+                            <property name="label" translatable="yes">15$</property>
                             <attributes>
                               <attribute name="font-desc" value="Sans Bold 13"/>
                             </attributes>
@@ -709,7 +709,7 @@
                             <property name="width-request">50</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">30$</property>
+                            <property name="label" translatable="yes">20$</property>
                             <attributes>
                               <attribute name="font-desc" value="Sans Bold 13"/>
                             </attributes>
@@ -798,7 +798,7 @@
                             <property name="width-request">50</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">30$</property>
+                            <property name="label" translatable="yes">10$</property>
                             <attributes>
                               <attribute name="font-desc" value="Sans Bold 13"/>
                             </attributes>
@@ -887,7 +887,7 @@
                             <property name="width-request">50</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">30$</property>
+                            <property name="label" translatable="yes">5$</property>
                             <attributes>
                               <attribute name="font-desc" value="Sans Bold 13"/>
                             </attributes>
@@ -976,7 +976,7 @@
                             <property name="width-request">50</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">30$</property>
+                            <property name="label" translatable="yes">15$</property>
                             <attributes>
                               <attribute name="font-desc" value="Sans Bold 13"/>
                             </attributes>
@@ -1092,7 +1092,7 @@
                             <property name="width-request">50</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">30$</property>
+                            <property name="label" translatable="yes">3$</property>
                             <attributes>
                               <attribute name="font-desc" value="Sans Bold 13"/>
                             </attributes>
@@ -1181,7 +1181,7 @@
                             <property name="width-request">50</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">30$</property>
+                            <property name="label" translatable="yes">3$</property>
                             <attributes>
                               <attribute name="font-desc" value="Sans Bold 13"/>
                             </attributes>
@@ -1270,7 +1270,7 @@
                             <property name="width-request">50</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">30$</property>
+                            <property name="label" translatable="yes">3$</property>
                             <attributes>
                               <attribute name="font-desc" value="Sans Bold 13"/>
                             </attributes>
@@ -1359,7 +1359,7 @@
                             <property name="width-request">50</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">30$</property>
+                            <property name="label" translatable="yes">3$</property>
                             <attributes>
                               <attribute name="font-desc" value="Sans Bold 13"/>
                             </attributes>
@@ -1513,6 +1513,7 @@
     <property name="height-request">500</property>
     <property name="can-focus">False</property>
     <property name="resizable">False</property>
+    <property name="window-position">center</property>
     <property name="deletable">False</property>
     <child>
       <object class="GtkFixed" id="fixed10">

@@ -509,6 +509,7 @@ void on_button5_1_clicked(GtkButton *b)
         gtk_widget_hide(window5);
         gtk_widget_hide(window4);
         gtk_widget_show(window6);
+        gtk_label_set_text((GtkLabel*) label5_5, "");
         gtk_entry_set_text((GtkEntry*) entry5_1, "");
         gtk_entry_set_text((GtkEntry*) entry5_2, "");
         gtk_entry_set_text((GtkEntry*) entry5_3, "");
@@ -641,6 +642,7 @@ void on_button7_1_clicked(GtkButton *b)
             gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_8), 0);
             gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_9), 0);
             gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin6_10), 0);
+            gtk_label_set_text((GtkLabel*) label7_4, "");
         } else
         {
             gtk_label_set_text((GtkLabel*) label7_4, "Sorry, your ordered items are now out-of-stock.");
