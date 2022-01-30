@@ -1,18 +1,4 @@
 Import:
 Time, Name, Number, Unit
-Sun Jan 30 15:49:59 2022
-,ginger,10000,grams
-Sun Jan 30 15:53:23 2022
-,carrot,10000,grams
-Sun Jan 30 15:53:32 2022
-,beef,10000,grams
-Sun Jan 30 15:53:41 2022
-,coconut,10000,grams
 Export:
 Time, Name, Number, Unit
-Sun Jan 30 15:53:23 2022
-,carrot,660,grams
-Sun Jan 30 15:49:59 2022
-,ginger,106,grams
-Sun Jan 30 15:49:59 2022
-,ginger,53,grams

@@ -3487,7 +3487,7 @@
           <object class="GtkLabel" id="label5_2">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">Name:</property>
+            <property name="label" translatable="yes">Guest:</property>
             <attributes>
               <attribute name="font-desc" value="Sans 12"/>
               <attribute name="foreground" value="#000000000000"/>
